@@ -39,11 +39,11 @@ Pulled from the Spotify, YouTube, Instagram and Facebook profiles:
 - *Bihar Ki Pukar* featured as the latest release
 - Popular tracks list, and a working Spotify player
 - Booking email `djay89840@gmail.com`, and all four social links
+- The hero photograph and the live press photo
 - Page title, search description, and the link-preview image
 
 ## What is still blank
 
-- **A press photo** — the About section currently uses the *Kya Likhun* artwork as a stand-in
 - **Bio** — the first sentence is factual; paragraphs 2 and 3 are prompts to replace
 - **Shows** — an empty state, with a ready-to-uncomment date list
 
@@ -60,24 +60,34 @@ and link underlines across the whole site:
 
 A few alternatives are listed in the comment just below it.
 
-## 2. The hero background
+## 2. The photos
 
-Right now the hero uses the *Bihar Ki Pukar* artwork, blurred heavily, as its
-background. That is deliberate — it looks designed and needs no photo.
+| File | Where it appears | Shape |
+|---|---|---|
+| `hero.jpg` | Background of the opening screen | wide, 1700×966 |
+| `press.jpg` | The About section | tall, 1050×1400 |
+| `cover-*.jpg` | The release cards | square, 640×640 |
 
-When there is a real hero photo: save it as `images/hero.jpg` (wide, ~1600×1000),
-then in `style.css` find `.hero__bg` and follow the note there — change the
-`url()` and drop the blur to `0px`.
+To swap either photo, drop a new file in `images/` **with the same filename**.
+Keep them under ~400 KB — [squoosh.app](https://squoosh.app) shrinks them free,
+in the browser.
 
-Pick a photo where the subject sits in the upper half with space at the
-bottom-left; that is where the name and buttons land.
+### If a new photo sits badly in the frame
 
-## 3. The press photo
+Both photos are cropped by CSS, and each has one line controlling which part
+stays visible. The two numbers are horizontal, then vertical.
 
-Save it as `images/press.jpg` (tall, ~900×1125), then in `index.html` find the
-About section and change the `img src` to `images/press.jpg`. There is a comment
-right above it. Keep photos under ~500 KB — [squoosh.app](https://squoosh.app)
-shrinks them free, in the browser.
+- Hero — `style.css`, find `.hero__bg`:
+  `background: url('images/hero.jpg') 58% 30% / cover no-repeat;`
+  There is a second, separate setting for phones lower down under
+  `@media (max-width: 860px)`, because a wide photo crops hard on a narrow
+  screen. Check both.
+- About — `style.css`, find `.about__photo img`:
+  `object-position: 30% 62%;`
+
+Each also has a `filter:` line next to it setting brightness and contrast. The
+hero is darkened so the headline stays readable over it; the live shot is
+brightened because it was shot in the dark.
 
 ## 4. The words
 
